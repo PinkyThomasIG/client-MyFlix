@@ -18758,19 +18758,10 @@ const MainView = ()=>{
     _s();
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-    /*  useEffect(() => {
-    fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("API Response:", data); // Log the entire response here
-        setMovies(data); // Directly set the array of movies
-      })
-      .catch((error) => console.error("Error fetching movies:", error));
-  }, []); */ (0, _react.useEffect)(()=>{
+    (0, _react.useEffect)(()=>{
         fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            console.log("API Response:", data); // Check this log
-            if (Array.isArray(data)) setMovies(data); // Set movies only if it's an array
-            else console.error("API did not return an array of movies.");
+            console.log("API Response:", data); // Log the entire response here
+            setMovies(data); // Directly set the array of movies
         }).catch((error)=>console.error("Error fetching movies:", error));
     }, []);
     // If a movie is selected, render the MovieView component
@@ -18779,7 +18770,7 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 36,
+        lineNumber: 22,
         columnNumber: 7
     }, undefined);
     // If no movies are fetched, show a "list is empty" message
@@ -18787,7 +18778,7 @@ const MainView = ()=>{
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 45,
+        lineNumber: 31,
         columnNumber: 12
     }, undefined);
     // Otherwise, map over the movies and render a MovieCard for each
@@ -18797,12 +18788,12 @@ const MainView = ()=>{
                 onMovieClick: (newSelectedMovie)=>setSelectedMovie(newSelectedMovie)
             }, movie._id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 52,
+                lineNumber: 38,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 50,
+        lineNumber: 36,
         columnNumber: 5
     }, undefined);
 };

@@ -6,26 +6,12 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  /*  useEffect(() => {
+  useEffect(() => {
     fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies")
       .then((response) => response.json())
       .then((data) => {
         console.log("API Response:", data); // Log the entire response here
         setMovies(data); // Directly set the array of movies
-      })
-      .catch((error) => console.error("Error fetching movies:", error));
-  }, []); */
-
-  useEffect(() => {
-    fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("API Response:", data); // Check this log
-        if (Array.isArray(data)) {
-          setMovies(data); // Set movies only if it's an array
-        } else {
-          console.error("API did not return an array of movies.");
-        }
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }, []);
