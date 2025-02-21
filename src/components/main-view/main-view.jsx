@@ -1,68 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  const [movies, setMovies] = useState([
-    {
-      id: 1,
-      title: "Inception",
-      image:
-        "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQovCe0H45fWwAtV31ajOdXRPTxSsMQgPIQ3lcZX_mAW0jXV3kH",
-      description: "A mind-bending thriller about dream invaders.",
-      genre: "Sci-Fi, Action",
-      director: "Christopher Nolan",
-    },
-    {
-      id: 2,
-      title: "The Matrix",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5DoFtShSmClflZ0RzBj9JBMweU5IUVBCeEbbLeV2XPlCnTKNi",
-      description: "A hacker discovers the truth about the world he lives in.",
-      genre: "Sci-Fi, Action",
-      director: "The Wachowskis",
-    },
-    {
-      id: 3,
-      title: "Interstellar",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9oW0XQlu1lo1G_49M-YwGzKR6rUg-CtflZj07HfbT8d2GwKWg",
-      description:
-        "A team of astronauts explore space to find a new home for humanity.",
-      genre: "Sci-Fi, Drama",
-      director: "Christopher Nolan",
-    },
-  ]);
-
+  const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  /*  useEffect(() => {
+    fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("API Response:", data); // Log the entire response here
+        setMovies(data); // Directly set the array of movies
+      })
+      .catch((error) => console.error("Error fetching movies:", error));
+  }, []); */
+
+  useEffect(() => {
+    fetch("https://movieflix-application-717006838e7d.herokuapp.com/movies")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("API Response:", data); // Check this log
+        if (Array.isArray(data)) {
+          setMovies(data); // Set movies only if it's an array
+        } else {
+          console.error("API did not return an array of movies.");
+        }
+      })
+      .catch((error) => console.error("Error fetching movies:", error));
+  }, []);
+
+  // If a movie is selected, render the MovieView component
   if (selectedMovie) {
     return (
       <MovieView
         movie={selectedMovie}
-        onBackClick={() => setSelectedMovie(null)}
+        onBackClick={() => setSelectedMovie(null)} // Go back to the movie list
       />
     );
   }
 
+  // If no movies are fetched, show a "list is empty" message
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
 
+  // Otherwise, map over the movies and render a MovieCard for each
   return (
     <div>
-      <h1>Movie List</h1>
-      <div>
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }}
-          />
-        ))}
-      </div>
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie._id} // Use _id as the unique key for each movie
+          movie={movie} // Pass the entire movie object to MovieCard
+          onMovieClick={(newSelectedMovie) =>
+            setSelectedMovie(newSelectedMovie)
+          } // Set selected movie on click
+        />
+      ))}
     </div>
   );
 };

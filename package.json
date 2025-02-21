@@ -2,7 +2,8 @@
   "name": "client-myflix",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,7 @@
   "homepage": "https://github.com/PinkyThomasIG/client-MyFlix#readme",
   "description": "",
   "dependencies": {
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
