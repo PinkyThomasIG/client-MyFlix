@@ -1,0 +1,26 @@
+{
+  "name": "client-myflix",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PinkyThomasIG/client-MyFlix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PinkyThomasIG/client-MyFlix/issues"
+  },
+  "homepage": "https://github.com/PinkyThomasIG/client-MyFlix#readme",
+  "description": "",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.13.3",
+    "process": "^0.11.10"
+  }
+}
